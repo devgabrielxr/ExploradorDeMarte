@@ -1,0 +1,40 @@
+## Build e artefatos do .NET
+bin/
+obj/
+*.dll
+*.exe
+*.app
+*.pdb
+
+## Diretórios de publicação
+publish/
+out/
+
+## Configurações do usuário
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## Logs e relatórios
+*.log
+TestResult*/
+TestResults/
+.vs/
+.vscode/
+
+## Arquivos de pacotes
+*.nupkg
+*.snupkg
+packages/
+.nuget/
+project.lock.json
+project.fragment.lock.json
+
+## Sistema operacional
+.DS_Store
+Thumbs.db
+
+## Arquivos de ambiente/segurança
+.env
+secrets.json
