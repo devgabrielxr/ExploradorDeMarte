@@ -53,5 +53,43 @@ namespace ExploradorDeMarte.API.Controladores
                 limiteY = planalto.LimiteY
             });
         }
+
+        [HttpPut]
+        public IActionResult Atualizar([FromBody] PlanaltoDTO dto)
+        {
+            try
+            {
+                var planalto = _servicoPlanalto.AtualizarPlanalto(dto.LimiteX, dto.LimiteY);
+
+                return Ok(new
+                {
+                    mensagem = "Planalto atualizado com sucesso!",
+                    limiteX = planalto.LimiteX,
+                    limiteY = planalto.LimiteY
+                });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { erro = ex.Message });
+            }
+        }
+
+        [HttpDelete]
+        public IActionResult Remover()
+        {
+            try
+            {
+                _servicoPlanalto.RemoverPlanalto();
+
+                return Ok(new
+                {
+                    mensagem = "Planalto removido com sucesso!"
+                });
+            }
+            catch (Exception ex)
+            {
+                return NotFound(new { erro = ex.Message });
+            }
+        }
     }
 }

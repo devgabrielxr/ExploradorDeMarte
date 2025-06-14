@@ -15,6 +15,24 @@ namespace ExploradorDeMarte.API.Dominio.Servicos
             return _planalto;
         }
 
+        public Planalto AtualizarPlanalto(int limiteX, int limiteY)
+        {
+            if (_planalto == null)
+                throw new InvalidOperationException("Nenhum planalto existente para atualizar.");
+
+            _planalto = new Planalto(limiteX, limiteY);
+            return _planalto;
+        }
+
+        public void RemoverPlanalto()
+        {
+            if (_planalto == null)
+                throw new InvalidOperationException("Nenhum planalto existente para remover.");
+
+            _planalto = null;
+        }
+
         public Planalto? ObterPlanalto() => _planalto;
+
     }
 }
