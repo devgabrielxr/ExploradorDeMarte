@@ -10,11 +10,14 @@ namespace ExploradorDeMarte.API.Controladores
     {
         private readonly IServicoPlanalto _servicoPlanalto;
 
+        #region Construtores
         public PlanaltoController(IServicoPlanalto servicoPlanalto)
         {
             _servicoPlanalto = servicoPlanalto;
         }
+        #endregion
 
+        #region Métodos
         [HttpGet]
         public IActionResult Obter()
         {
@@ -91,5 +94,6 @@ namespace ExploradorDeMarte.API.Controladores
                 return NotFound(new { erro = ex.Message });
             }
         }
+        #endregion
     }
 }
