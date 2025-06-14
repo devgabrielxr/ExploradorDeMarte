@@ -1,9 +1,11 @@
+using ExploradorDeMarte.API.Dominio.Entidades.Interfaces;
+
 namespace ExploradorDeMarte.API.Dominio.Entidades
 {
-    public class Planalto
+    public class Planalto : IPlanalto
     {
-        public int LimiteX { get; }
-        public int LimiteY { get; }
+        public int LimiteX { get; private set; }
+        public int LimiteY { get; private set; }
 
         public Planalto(int limiteX, int limiteY)
         {

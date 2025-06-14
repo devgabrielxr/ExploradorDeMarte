@@ -1,5 +1,5 @@
 using ExploradorDeMarte.API.Dominio.DTOs;
-using ExploradorDeMarte.API.Dominio.Servicos;
+using ExploradorDeMarte.API.Dominio.Servicos.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ExploradorDeMarte.API.Controladores
@@ -8,9 +8,9 @@ namespace ExploradorDeMarte.API.Controladores
     [Route("api/v1/[controller]")]
     public class PlanaltoController : ControllerBase
     {
-        private readonly ServicoPlanalto _servicoPlanalto;
+        private readonly IServicoPlanalto _servicoPlanalto;
 
-        public PlanaltoController(ServicoPlanalto servicoPlanalto)
+        public PlanaltoController(IServicoPlanalto servicoPlanalto)
         {
             _servicoPlanalto = servicoPlanalto;
         }

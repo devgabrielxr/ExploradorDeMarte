@@ -1,4 +1,5 @@
 using ExploradorDeMarte.API.Dominio.Servicos;
+using ExploradorDeMarte.API.Dominio.Servicos.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,7 +10,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddSingleton<ServicoPlanalto>();
+builder.Services.AddSingleton<IServicoPlanalto, ServicoPlanalto>();
 
 var app = builder.Build();
 

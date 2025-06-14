@@ -1,12 +1,14 @@
 using ExploradorDeMarte.API.Dominio.Entidades;
+using ExploradorDeMarte.API.Dominio.Entidades.Interfaces;
+using ExploradorDeMarte.API.Dominio.Servicos.Interfaces;
 
 namespace ExploradorDeMarte.API.Dominio.Servicos
 {
-    public class ServicoPlanalto
+    public class ServicoPlanalto : IServicoPlanalto
     {
         private Planalto? _planalto;
 
-        public Planalto CriarPlanalto(int limiteX, int limiteY)
+        public IPlanalto CriarPlanalto(int limiteX, int limiteY)
         {
             if (_planalto != null)
                 throw new InvalidOperationException("O planalto já foi criado.");
@@ -15,7 +17,7 @@ namespace ExploradorDeMarte.API.Dominio.Servicos
             return _planalto;
         }
 
-        public Planalto AtualizarPlanalto(int limiteX, int limiteY)
+        public IPlanalto AtualizarPlanalto(int limiteX, int limiteY)
         {
             if (_planalto == null)
                 throw new InvalidOperationException("Nenhum planalto existente para atualizar.");
@@ -32,6 +34,6 @@ namespace ExploradorDeMarte.API.Dominio.Servicos
             _planalto = null;
         }
 
-        public Planalto? ObterPlanalto() => _planalto;
+        public IPlanalto? ObterPlanalto() => _planalto;
     }
 }
