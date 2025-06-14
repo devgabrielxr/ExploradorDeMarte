@@ -1,5 +1,6 @@
+using ExploradorDeMarte.API.Dominio.DTOs;
 using ExploradorDeMarte.API.Dominio.Entidades;
-using ExploradorDeMarte.API.Dominio.Entidades.Interfaces;
+using ExploradorDeMarte.API.Dominio.Mapeadores;
 using ExploradorDeMarte.API.Dominio.Servicos.Interfaces;
 
 namespace ExploradorDeMarte.API.Dominio.Servicos
@@ -8,22 +9,26 @@ namespace ExploradorDeMarte.API.Dominio.Servicos
     {
         private Planalto? _planalto;
 
-        public IPlanalto CriarPlanalto(int limiteX, int limiteY)
+        public PlanaltoDTO CriarPlanalto(int limiteX, int limiteY)
         {
             if (_planalto != null)
                 throw new InvalidOperationException("O planalto já foi criado.");
 
             _planalto = new Planalto(limiteX, limiteY);
-            return _planalto;
+            var retorno = PlanaltoMap.ParaDTO(_planalto);
+
+            return retorno;
         }
 
-        public IPlanalto AtualizarPlanalto(int limiteX, int limiteY)
+        public PlanaltoDTO AtualizarPlanalto(int limiteX, int limiteY)
         {
             if (_planalto == null)
                 throw new InvalidOperationException("Nenhum planalto existente para atualizar.");
 
             _planalto = new Planalto(limiteX, limiteY);
-            return _planalto;
+            var retorno = PlanaltoMap.ParaDTO(_planalto);
+
+            return retorno;
         }
 
         public void RemoverPlanalto()
@@ -34,6 +39,9 @@ namespace ExploradorDeMarte.API.Dominio.Servicos
             _planalto = null;
         }
 
-        public IPlanalto? ObterPlanalto() => _planalto;
+        public PlanaltoDTO? ObterPlanalto()
+        {
+            return _planalto == null ? null : PlanaltoMap.ParaDTO(_planalto);
+        }
     }
 }

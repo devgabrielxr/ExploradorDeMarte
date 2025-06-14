@@ -1,12 +1,10 @@
-using ExploradorDeMarte.API.Dominio.Entidades.Interfaces;
-
+using ExploradorDeMarte.API.Dominio.DTOs;
 namespace ExploradorDeMarte.API.Dominio.Servicos.Interfaces;
 
 public interface IServicoPlanalto
 {
-        IPlanalto CriarPlanalto(int limiteX, int limiteY);
-        IPlanalto AtualizarPlanalto(int limiteX, int limiteY);
+        PlanaltoDTO CriarPlanalto(int limiteX, int limiteY);
+        PlanaltoDTO AtualizarPlanalto(int limiteX, int limiteY);
         void RemoverPlanalto();
-        IPlanalto? ObterPlanalto();
-
+        PlanaltoDTO? ObterPlanalto();
 }
