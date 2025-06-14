@@ -15,6 +15,21 @@ namespace ExploradorDeMarte.API.Controladores
             _servicoPlanalto = servicoPlanalto;
         }
 
+        [HttpGet]
+        public IActionResult Obter()
+        {
+            var planalto = _servicoPlanalto.ObterPlanalto();
+
+            if (planalto == null)
+                return NotFound(new { erro = "Planalto ainda não foi criado ou removido." });
+
+            return Ok(new
+            {
+                limiteX = planalto.LimiteX,
+                limiteY = planalto.LimiteY
+            });
+        }
+
         [HttpPost]
         public IActionResult Criar([FromBody] PlanaltoDTO dto)
         {
@@ -37,21 +52,6 @@ namespace ExploradorDeMarte.API.Controladores
             {
                 return Conflict(new { erro = ex.Message });
             }
-        }
-
-        [HttpGet]
-        public IActionResult Obter()
-        {
-            var planalto = _servicoPlanalto.ObterPlanalto();
-
-            if (planalto == null)
-                return NotFound(new { erro = "Planalto ainda não foi criado ou removido." });
-
-            return Ok(new
-            {
-                limiteX = planalto.LimiteX,
-                limiteY = planalto.LimiteY
-            });
         }
 
         [HttpPut]
