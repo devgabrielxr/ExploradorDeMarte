@@ -26,7 +26,7 @@ namespace ExploradorDeMarte.API.Dominio.Entidades
             return x >= 0 && x <= LimiteX && y >= 0 && y <= LimiteY;
         }
 
-        public bool PosicaoEhValida(Coordenada coordenada)
+        public bool PosicaoEhValida(ICoordenada coordenada)
         {
             return PosicaoEhValida(coordenada.X, coordenada.Y);
         }

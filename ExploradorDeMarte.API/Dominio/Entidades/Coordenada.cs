@@ -1,6 +1,8 @@
+using ExploradorDeMarte.API.Dominio.Entidades.Interfaces;
+
 namespace ExploradorDeMarte.API.Dominio.Entidades
 {
-    public class Coordenada
+    public class Coordenada : ICoordenada
     {
         #region Propriedades
         public int X { get; }

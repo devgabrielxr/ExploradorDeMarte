@@ -9,6 +9,6 @@ public interface IPlanalto
 
     #region Métodos
     bool PosicaoEhValida(int x, int y);
-    bool PosicaoEhValida(Coordenada coordenada);
+    bool PosicaoEhValida(ICoordenada coordenada);
     #endregion
 }
