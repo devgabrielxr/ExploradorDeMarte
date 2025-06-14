@@ -20,7 +20,7 @@ namespace ExploradorDeMarte.API.Controladores
         {
             try
             {
-                var planalto = _servicoPlanalto.CriarPlanalto(dto.LimiteX, dto.LimiteY);
+                var planalto = _servicoPlanalto.CriarPlanalto(dto);
 
                 return CreatedAtAction(nameof(Obter), new { }, new
                 {
@@ -59,7 +59,7 @@ namespace ExploradorDeMarte.API.Controladores
         {
             try
             {
-                var planalto = _servicoPlanalto.AtualizarPlanalto(dto.LimiteX, dto.LimiteY);
+                var planalto = _servicoPlanalto.AtualizarPlanalto(dto);
 
                 return Ok(new
                 {
