@@ -11,6 +11,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddSingleton<IServicoPlanalto, ServicoPlanalto>();
+builder.Services.AddSingleton<IServicoSonda, ServicoSonda>();
 
 var app = builder.Build();
 
