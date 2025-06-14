@@ -24,5 +24,73 @@ namespace ExploradorDeMarte.Testes.Servicos
             Assert.Equal(5, resultado.LimiteX);
             Assert.Equal(5, resultado.LimiteY);
         }
+
+        [Fact(DisplayName = "Deve retornar DTO ao obter planalto existente")]
+        public void ObterPlanalto_QuandoExiste_DeveRetornarDTO()
+        {
+            // Arrange
+            var servico = CriarServico();
+            var dto = new PlanaltoDTO { LimiteX = 4, LimiteY = 4 };
+            servico.CriarPlanalto(dto);
+
+            // Act
+            var resultado = servico.ObterPlanalto();
+
+            // Assert
+            Assert.NotNull(resultado);
+            Assert.Equal(4, resultado.LimiteX);
+            Assert.Equal(4, resultado.LimiteY);
+        }
+
+        [Fact(DisplayName = "Deve retornar null ao obter planalto inexistente")]
+        public void ObterPlanalto_QuandoNaoExiste_DeveRetornarNull()
+        {
+            // Arrange
+            var servico = CriarServico();
+
+            // Act
+            var resultado = servico.ObterPlanalto();
+
+            // Assert
+            Assert.Null(resultado);
+        }
+
+        [Fact(DisplayName = "Deve lançar exceção ao criar planalto com limites negativos")]
+        public void CriarPlanalto_ComLimitesNegativos_DeveLancarExcecao()
+        {
+            // Arrange
+            var servico = CriarServico();
+            var dto = new PlanaltoDTO { LimiteX = -1, LimiteY = 2 };
+
+            // Act & Assert
+            var ex = Assert.Throws<ArgumentException>(() => servico.CriarPlanalto(dto));
+            Assert.Equal("Os limites do planalto devem ser positivos.", ex.Message);
+        }
+
+        [Fact(DisplayName = "Deve lançar exceção ao atualizar com limites inválidos")]
+        public void AtualizarPlanalto_ComLimitesInvalidos_DeveLancarExcecao()
+        {
+            // Arrange
+            var servico = CriarServico();
+            servico.CriarPlanalto(new PlanaltoDTO { LimiteX = 2, LimiteY = 2 });
+
+            var dtoInvalido = new PlanaltoDTO { LimiteX = 0, LimiteY = -3 };
+
+            // Act & Assert
+            var ex = Assert.Throws<ArgumentException>(() => servico.AtualizarPlanalto(dtoInvalido));
+            Assert.Equal("Os limites do planalto devem ser positivos.", ex.Message);
+        }
+
+        [Fact(DisplayName = "Deve lançar exceção ao criar planalto com zero")]
+        public void CriarPlanalto_ComZero_DeveLancarExcecao()
+        {
+            // Arrange
+            var servico = CriarServico();
+            var dto = new PlanaltoDTO { LimiteX = 0, LimiteY = 0 };
+
+            // Act & Assert
+            var ex = Assert.Throws<ArgumentException>(() => servico.CriarPlanalto(dto));
+            Assert.Equal("Os limites do planalto devem ser positivos.", ex.Message);
+        }
     }
 }
