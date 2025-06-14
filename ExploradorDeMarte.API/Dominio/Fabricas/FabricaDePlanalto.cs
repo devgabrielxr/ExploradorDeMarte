@@ -8,9 +8,6 @@ namespace ExploradorDeMarte.API.Dominio.Fabricas
     {
         public static IPlanalto Criar(PlanaltoDTO dto)
         {
-            if (dto.LimiteX <= 0 || dto.LimiteY <= 0)
-                throw new ArgumentException("Os limites do planalto devem ser maiores que zero.");
-
             return new Planalto(dto.LimiteX, dto.LimiteY);
         }
     }
