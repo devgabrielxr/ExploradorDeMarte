@@ -4,7 +4,11 @@ namespace ExploradorDeMarte.API.Dominio.Entidades.Interfaces
 {
     public interface ISonda
     {
+        #region Propriedades
+        int Id { get; }
+        string Nome { get; }
         ICoordenada Coordenada { get; }
         eDirecao Direcao { get; }
+        #endregion
     }
 }

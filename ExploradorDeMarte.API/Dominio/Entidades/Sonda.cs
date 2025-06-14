@@ -5,13 +5,21 @@ namespace ExploradorDeMarte.API.Dominio.Entidades
 {
     public class Sonda : ISonda
     {
+        #region Propriedades
+        public int Id { get; private set; }
+        public string Nome { get; private set; }
         public ICoordenada Coordenada { get; private set; }
         public eDirecao Direcao { get; private set; }
+        #endregion
 
-        public Sonda(ICoordenada coordenada, eDirecao direcao)
+        #region Construtores
+        public Sonda(int id, string nome, ICoordenada coordenada, eDirecao direcao)
         {
+            Id = id;
+            Nome = nome;
             Coordenada = coordenada;
             Direcao = direcao;
         }
+        #endregion
     }
 }
