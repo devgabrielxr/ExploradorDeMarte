@@ -33,6 +33,5 @@ namespace ExploradorDeMarte.API.Dominio.Servicos
         }
 
         public Planalto? ObterPlanalto() => _planalto;
-
     }
 }

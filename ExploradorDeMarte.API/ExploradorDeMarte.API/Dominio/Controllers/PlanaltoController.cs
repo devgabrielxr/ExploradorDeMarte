@@ -45,7 +45,7 @@ namespace ExploradorDeMarte.API.Controladores
             var planalto = _servicoPlanalto.ObterPlanalto();
 
             if (planalto == null)
-                return NotFound(new { erro = "Planalto ainda não foi criado." });
+                return NotFound(new { erro = "Planalto ainda não foi criado ou removido." });
 
             return Ok(new
             {
