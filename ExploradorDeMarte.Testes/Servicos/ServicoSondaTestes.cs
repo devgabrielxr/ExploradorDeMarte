@@ -136,5 +136,31 @@ public class ServicoSondaTestes
         Assert.Contains("Comando inválido", ex.Message);
     }
 
+    [Fact(DisplayName = "Deve remover sonda existente com sucesso")]
+    public void RemoverSonda_Existente_DeveRemoverComSucesso()
+    {
+        // Arrange
+        var dto = new SondaDTO
+        {
+            Nome = "Sonda 3",
+            X = 2,
+            Y = 2,
+            Direcao = eDirecao.Sul
+        };
+
+        var planalto = FabricaDePlanalto.Criar(new PlanaltoDTO { LimiteX = 5, LimiteY = 5 });
+        _mockPlanalto.Setup(p => p.ObterEntidadePlanalto()).Returns(planalto);
+
+        _servicoSonda.CriarSonda(dto);
+
+        // Act
+        _servicoSonda.RemoverSonda("Sonda 3");
+
+        // Assert
+        var sondas = _servicoSonda.ObterSondas();
+        Assert.DoesNotContain(sondas, s => s.Nome == "Sonda 3");
+    }
+
+
 
 }
