@@ -1,9 +1,33 @@
 using ExploradorDeMarte.API.Dominio.Servicos;
 using ExploradorDeMarte.API.Dominio.Servicos.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
+
+builder.Services.Configure<ApiBehaviorOptions>(options =>
+{
+    options.InvalidModelStateResponseFactory = context =>
+    {
+        var errors = context.ModelState
+            .Where(x => x.Value?.Errors.Count > 0)
+            .ToDictionary(
+                x => x.Key,
+                x => x.Value!.Errors.Select(e => e.ErrorMessage).ToArray()
+            );
+
+        var result = new
+        {
+            status = 400,
+            title = "Erro de validação",
+            detail = "Há erros nos dados enviados. Verifique os campos.",
+            errors
+        };
+
+        return new BadRequestObjectResult(result);
+    };
+});
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
