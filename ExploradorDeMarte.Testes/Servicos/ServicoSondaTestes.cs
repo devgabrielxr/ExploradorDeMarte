@@ -1,4 +1,3 @@
-using System;
 using ExploradorDeMarte.API.Dominio.DTOs;
 using ExploradorDeMarte.API.Dominio.Enumeradores;
 using ExploradorDeMarte.API.Dominio.Fabricas;
