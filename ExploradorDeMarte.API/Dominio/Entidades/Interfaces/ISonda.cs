@@ -14,6 +14,8 @@ namespace ExploradorDeMarte.API.Dominio.Entidades.Interfaces
         #region Métodos
         void GirarEsquerda();
         void GirarDireita();
+        ICoordenada ObterProximaCoordenada();
+        void MoverPara(ICoordenada novaCoordenada);
         #endregion
     }
 }
