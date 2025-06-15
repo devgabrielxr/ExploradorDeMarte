@@ -1,6 +1,6 @@
 using ExploradorDeMarte.API.Dominio.DTOs;
 using ExploradorDeMarte.API.Dominio.Servicos.Interfaces;
-using ExploradorDeMarte.API.Dominio.Fabricas;
+using ExploradorDeMarte.API.Dominio.Servicos;
 
 namespace ExploradorDeMarte.Testes.Servicos
 {
@@ -10,7 +10,7 @@ namespace ExploradorDeMarte.Testes.Servicos
 
         public ServicoPlanaltoTestes()
         {
-            _servicoPlanalto = FabricaDeServicoPlanalto.Criar();
+            _servicoPlanalto = new ServicoPlanalto();
         }
 
         [Fact(DisplayName = "Deve criar um planalto com limites válidos")]
