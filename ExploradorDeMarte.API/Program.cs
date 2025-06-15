@@ -22,6 +22,27 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseStatusCodePages(async context =>
+{
+    var response = context.HttpContext.Response;
+    var requestPath = context.HttpContext.Request.Path;
+
+    if (response.StatusCode == 404 && requestPath != "/")
+    {
+        response.ContentType = "application/json";
+
+        var result = new
+        {
+            status = 404,
+            title = "Recurso não encontrado",
+            detail = "O endpoint requisitado não existe.",
+            path = context.HttpContext.Request.Path
+        };
+
+        await response.WriteAsJsonAsync(result);
+    }
+});
+
 app.UseHttpsRedirection();
 
 app.MapControllers();
