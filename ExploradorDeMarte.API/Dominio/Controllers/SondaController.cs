@@ -15,6 +15,13 @@ namespace ExploradorDeMarte.API.Controladores
             _servicoSonda = servicoSonda;
         }
 
+        [HttpGet]
+        public IActionResult ObterTodas()
+        {
+            var sondas = _servicoSonda.ObterSondas();
+            return Ok(sondas);
+        }
+
         [HttpPost]
         public IActionResult Criar([FromBody] SondaDTO dto)
         {
@@ -42,13 +49,6 @@ namespace ExploradorDeMarte.API.Controladores
             }
         }
 
-        [HttpGet]
-        public IActionResult ObterTodas()
-        {
-            var sondas = _servicoSonda.ObterSondas();
-            return Ok(sondas);
-        }
-
         [HttpPut("mover")]
         public IActionResult Mover([FromBody] ComandoMovimentarSondaDTO dto)
         {
@@ -69,6 +69,24 @@ namespace ExploradorDeMarte.API.Controladores
             catch (InvalidOperationException ex)
             {
                 return UnprocessableEntity(new { erro = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { erro = ex.Message });
+            }
+        }
+
+        [HttpDelete]
+        public IActionResult Remover(string nome)
+        {
+            try
+            {
+                _servicoSonda.RemoverSonda(nome);
+                return Ok(new { mensagem = "Sonda removida com sucesso!" });
+            }
+            catch (InvalidOperationException ex)
+            {
+                return NotFound(new { erro = ex.Message });
             }
             catch (Exception ex)
             {
