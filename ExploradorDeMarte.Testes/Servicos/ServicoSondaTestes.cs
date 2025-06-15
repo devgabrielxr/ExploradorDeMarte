@@ -45,5 +45,41 @@ public class ServicoSondaTestes
         Assert.Equal(dto.Direcao, resultado.Direcao);
     }
 
+    [Fact(DisplayName = "Deve retornar todas as sondas registradas")]
+    public void ObterSondas_QuandoSondasForemCriadas_DeveRetornarListaDTO()
+    {
+        // Arrange
+        var planalto = FabricaDePlanalto.Criar(new PlanaltoDTO { LimiteX = 5, LimiteY = 5 });
+        _mockPlanalto.Setup(p => p.ObterEntidadePlanalto()).Returns(planalto);
+
+        var dto1 = new SondaDTO
+        {
+            Nome = "Sonda A",
+            X = 1,
+            Y = 2,
+            Direcao = eDirecao.Norte
+        };
+
+        var dto2 = new SondaDTO
+        {
+            Nome = "Sonda B",
+            X = 2,
+            Y = 3,
+            Direcao = eDirecao.Leste
+        };
+
+        _servicoSonda.CriarSonda(dto1);
+        _servicoSonda.CriarSonda(dto2);
+
+        // Act
+        var sondas = _servicoSonda.ObterSondas();
+
+        // Assert
+        Assert.NotNull(sondas);
+        Assert.Equal(2, sondas.Count);
+
+        Assert.Contains(sondas, s => s.Nome == "Sonda A" && s.X == 1 && s.Y == 2 && s.Direcao == eDirecao.Norte);
+        Assert.Contains(sondas, s => s.Nome == "Sonda B" && s.X == 2 && s.Y == 3 && s.Direcao == eDirecao.Leste);
+    }
 
 }
