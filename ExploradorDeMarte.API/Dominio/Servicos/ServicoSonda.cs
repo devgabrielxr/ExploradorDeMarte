@@ -1,6 +1,7 @@
 using ExploradorDeMarte.API.Dominio.DTOs;
 using ExploradorDeMarte.API.Dominio.Entidades.Interfaces;
 using ExploradorDeMarte.API.Dominio.Fabricas;
+using ExploradorDeMarte.API.Dominio.Mapeadores;
 using ExploradorDeMarte.API.Dominio.Servicos.Interfaces;
 
 namespace ExploradorDeMarte.API.Dominio.Servicos
@@ -31,13 +32,14 @@ namespace ExploradorDeMarte.API.Dominio.Servicos
             var sonda = FabricaDeSonda.Criar(dto);
             _sondas.Add(sonda);
 
-            return new SondaDTO
-            {
-                Nome = sonda.Nome,
-                X = sonda.Coordenada.X,
-                Y = sonda.Coordenada.Y,
-                Direcao = sonda.Direcao
-            };
+            return SondaMap.ParaDTO(sonda);
+        }
+
+        public List<SondaDTO> ObterSondas()
+        {
+            return _sondas
+                .Select(s => s.ParaDTO())
+                .ToList();
         }
     }
 }
