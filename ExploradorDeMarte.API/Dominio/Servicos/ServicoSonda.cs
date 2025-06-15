@@ -41,5 +41,22 @@ namespace ExploradorDeMarte.API.Dominio.Servicos
                 .Select(s => s.ParaDTO())
                 .ToList();
         }
+
+        public SondaDTO MoverSonda(string nomeSonda, string comandos)
+        {
+            var sonda = _sondas.FirstOrDefault(s => s.Nome == nomeSonda)
+                ?? throw new InvalidOperationException($"Sonda com nome '{nomeSonda}' não encontrada.");
+
+            var planalto = _servicoPlanalto.ObterEntidadePlanalto()
+                ?? throw new InvalidOperationException("Nenhum planalto foi criado.");
+
+            foreach (char comandoChar in comandos)
+            {
+                var comando = FabricaDeComandoSonda.Criar(comandoChar);
+                comando.Executar(sonda, planalto, _sondas);
+            }
+
+            return SondaMap.ParaDTO(sonda);
+        }
     }
 }
