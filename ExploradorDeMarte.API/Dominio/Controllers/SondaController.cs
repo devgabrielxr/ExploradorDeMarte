@@ -1,4 +1,5 @@
 using ExploradorDeMarte.API.Dominio.DTOs;
+using ExploradorDeMarte.API.Dominio.Extensoes;
 using ExploradorDeMarte.API.Dominio.Servicos.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -23,11 +24,19 @@ namespace ExploradorDeMarte.API.Controladores
         }
 
         [HttpPost]
-        public IActionResult Criar([FromBody] SondaDTO dto)
+        public IActionResult Criar([FromBody] SondaCriacaoDTO dto)
         {
             try
             {
-                var resultado = _servicoSonda.CriarSonda(dto);
+                var sondaDTO = new SondaDTO
+                {
+                    Nome = dto.Nome,
+                    X = dto.X,
+                    Y = dto.Y,
+                    Direcao = dto.Direcao.ParaDirecaoEnum()
+                };
+
+                var resultado = _servicoSonda.CriarSonda(sondaDTO);
 
                 return CreatedAtAction(nameof(ObterTodas), new { nome = resultado.Nome }, new
                 {
