@@ -11,7 +11,7 @@ namespace ExploradorDeMarte.API.Dominio.Fabricas
 
         private static ISonda Criar(string nome, int x, int y, eDirecao direcao)
         {
-            var coordenada = new Coordenada(x, y);
+            var coordenada = FabricaDeCoordenada.Criar(x, y);
             var id = _contadorId++;
 
             return new Sonda(id, nome, coordenada, direcao);
