@@ -42,6 +42,14 @@ namespace ExploradorDeMarte.API.Dominio.Servicos
                 .ToList();
         }
 
+        public void RemoverSonda(string nome)
+        {
+            var sonda = _sondas.FirstOrDefault(s => s.Nome == nome)
+                ?? throw new InvalidOperationException($"Sonda com nome '{nome}' não encontrada.");
+
+            _sondas.Remove(sonda);
+        }
+
         public SondaDTO MoverSonda(string nomeSonda, string comandos)
         {
             var sonda = _sondas.FirstOrDefault(s => s.Nome == nomeSonda)
