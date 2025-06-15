@@ -82,4 +82,59 @@ public class ServicoSondaTestes
         Assert.Contains(sondas, s => s.Nome == "Sonda B" && s.X == 2 && s.Y == 3 && s.Direcao == eDirecao.Leste);
     }
 
+    [Fact(DisplayName = "Deve mover a sonda corretamente com uma sequencia de comandos")]
+    public void MoverSonda_ComandosValidos_DeveAtualizarPosicao()
+    {
+        // Arrange
+        var dto = new SondaDTO
+        {
+            Nome = "Sonda 1",
+            X = 1,
+            Y = 2,
+            Direcao = eDirecao.Norte
+        };
+
+
+        var planalto = FabricaDePlanalto.Criar(new PlanaltoDTO { LimiteX = 5, LimiteY = 5 });
+
+        _mockPlanalto.Setup(p => p.ObterEntidadePlanalto()).Returns(planalto);
+
+        _servicoSonda.CriarSonda(dto);
+
+        // Act
+        var resultado = _servicoSonda.MoverSonda("Sonda 1", "LMLMLMLMM");
+
+        // Assert
+        Assert.Equal(1, resultado.X);
+        Assert.Equal(3, resultado.Y);
+        Assert.Equal(eDirecao.Norte, resultado.Direcao);
+    }
+
+    [Fact(DisplayName = "Deve lançar exceção ao receber comando inválido")]
+    public void MoverSonda_ComandoInvalido_DeveLancarExcecao()
+    {
+        // Arrange
+        var dto = new SondaDTO
+        {
+            Nome = "Sonda 2",
+            X = 1,
+            Y = 0,
+            Direcao = eDirecao.Norte
+        };
+
+        var planalto = FabricaDePlanalto.Criar(new PlanaltoDTO { LimiteX = 5, LimiteY = 5 });
+
+        _mockPlanalto.Setup(p => p.ObterEntidadePlanalto()).Returns(planalto);
+
+        _servicoSonda.CriarSonda(dto);
+
+        // Act & Assert
+        var ex = Assert.Throws<ArgumentException>(() =>
+            _servicoSonda.MoverSonda("Sonda 2", "LMX")
+        );
+
+        Assert.Contains("Comando inválido", ex.Message);
+    }
+
+
 }
