@@ -10,5 +10,9 @@ namespace ExploradorDeMarte.API.Dominio.Entidades.Interfaces
         ICoordenada Coordenada { get; }
         eDirecao Direcao { get; }
         #endregion
+
+        #region Métodos
+        void GirarEsquerda();
+        #endregion
     }
 }

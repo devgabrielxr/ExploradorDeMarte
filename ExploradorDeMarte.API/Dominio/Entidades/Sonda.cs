@@ -21,5 +21,19 @@ namespace ExploradorDeMarte.API.Dominio.Entidades
             Direcao = direcao;
         }
         #endregion
+
+        #region Métodos
+        public void GirarEsquerda()
+        {
+            Direcao = Direcao switch
+            {
+                eDirecao.Norte => eDirecao.Oeste,
+                eDirecao.Oeste => eDirecao.Sul,
+                eDirecao.Sul => eDirecao.Leste,
+                eDirecao.Leste => eDirecao.Norte,
+                _ => throw new InvalidOperationException($"Direção inválida: {Direcao}")
+            };
+        }
+        #endregion
     }
 }
