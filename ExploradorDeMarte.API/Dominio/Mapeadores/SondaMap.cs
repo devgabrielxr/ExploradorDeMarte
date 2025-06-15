@@ -11,7 +11,8 @@ namespace ExploradorDeMarte.API.Dominio.Mapeadores
             {
                 Nome = sonda.Nome,
                 X = sonda.Coordenada.X,
-                Y = sonda.Coordenada.Y
+                Y = sonda.Coordenada.Y,
+                Direcao = sonda.Direcao
             };
         }
     }
