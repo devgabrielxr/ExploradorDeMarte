@@ -10,6 +10,7 @@ public class FabricaDeComandoSonda
         return comando switch
         {
             'L' => new ComandoGirarEsquerda(),
+            'R' => new ComandoGirarDireita(),
             _ => throw new ArgumentException($"Comando inválido: {comando}")
         };
     }

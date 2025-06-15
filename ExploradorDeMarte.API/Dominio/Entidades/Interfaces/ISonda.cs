@@ -13,6 +13,7 @@ namespace ExploradorDeMarte.API.Dominio.Entidades.Interfaces
 
         #region Métodos
         void GirarEsquerda();
+        void GirarDireita();
         #endregion
     }
 }

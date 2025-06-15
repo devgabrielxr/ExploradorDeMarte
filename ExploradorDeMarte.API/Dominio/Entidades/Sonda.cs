@@ -34,6 +34,19 @@ namespace ExploradorDeMarte.API.Dominio.Entidades
                 _ => throw new InvalidOperationException($"Direção inválida: {Direcao}")
             };
         }
+
+        public void GirarDireita()
+        {
+            Direcao = Direcao switch
+            {
+                eDirecao.Norte => eDirecao.Leste,
+                eDirecao.Leste => eDirecao.Sul,
+                eDirecao.Sul => eDirecao.Oeste,
+                eDirecao.Oeste => eDirecao.Norte,
+                _ => throw new InvalidOperationException($"Direção inválida: {Direcao}")
+            };
+        }
+
         #endregion
     }
 }
