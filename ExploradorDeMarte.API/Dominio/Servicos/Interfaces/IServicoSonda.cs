@@ -1,6 +1,8 @@
+using ExploradorDeMarte.API.Dominio.DTOs;
+
 namespace ExploradorDeMarte.API.Dominio.Servicos.Interfaces;
 
 public interface IServicoSonda
 {
-
+    SondaDTO CriarSonda(SondaDTO dto);
 }

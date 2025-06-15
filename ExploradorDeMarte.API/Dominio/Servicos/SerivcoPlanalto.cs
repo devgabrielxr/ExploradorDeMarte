@@ -42,5 +42,7 @@ namespace ExploradorDeMarte.API.Dominio.Servicos
         {
             return _planalto == null ? null : PlanaltoMap.ParaDTO(_planalto);
         }
+
+        public IPlanalto? ObterEntidadePlanalto() => _planalto;
     }
 }
