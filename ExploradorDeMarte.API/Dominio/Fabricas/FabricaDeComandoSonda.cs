@@ -11,6 +11,7 @@ public class FabricaDeComandoSonda
         {
             'L' => new ComandoGirarEsquerda(),
             'R' => new ComandoGirarDireita(),
+            'M' => new ComandoMover(),
             _ => throw new ArgumentException($"Comando inválido: {comando}")
         };
     }
