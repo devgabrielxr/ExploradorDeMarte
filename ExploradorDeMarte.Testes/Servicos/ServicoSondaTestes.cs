@@ -45,6 +45,40 @@ public class ServicoSondaTestes
         Assert.Equal(dto.Direcao, resultado.Direcao);
     }
 
+    [Fact(DisplayName = "Deve estourar exceção ao cadastrar sonda com nome já criada.")]
+    public void CriarSonda_ComNomeJaCriada_DeveLancarExcecao()
+    {
+        // Arrange
+        var dtoOriginal = new SondaDTO
+        {
+            Nome = "Sonda 1",
+            X = 2,
+            Y = 3,
+            Direcao = eDirecao.Norte
+        };
+
+        var dtoDuplicado = new SondaDTO
+        {
+            Nome = "Sonda 1",
+            X = 3,
+            Y = 4,
+            Direcao = eDirecao.Leste
+        };
+
+        var planalto = FabricaDePlanalto.Criar(new PlanaltoDTO { LimiteX = 5, LimiteY = 5 });
+
+        _mockPlanalto.Setup(p => p.ObterEntidadePlanalto()).Returns(planalto);
+        _servicoSonda.CriarSonda(dtoOriginal);
+
+        // Act
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            _servicoSonda.CriarSonda(dtoDuplicado)
+        );
+
+        // Assert
+        Assert.Equal("Já existe uma sonda com esse nome.", ex.Message);
+    }
+
     [Fact(DisplayName = "Deve retornar todas as sondas registradas")]
     public void ObterSondas_QuandoSondasForemCriadas_DeveRetornarListaDTO()
     {

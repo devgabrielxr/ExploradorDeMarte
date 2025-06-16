@@ -26,8 +26,11 @@ namespace ExploradorDeMarte.API.Dominio.Servicos
             if (!planalto.PosicaoEhValida(dto.X, dto.Y))
                 throw new InvalidOperationException("A posição da sonda está fora dos limites do planalto.");
 
+            if (_sondas.Any(s => s.Nome.Equals(dto.Nome, StringComparison.OrdinalIgnoreCase)))
+                throw new InvalidOperationException("Já existe uma sonda com esse nome.");
+
             if (_sondas.Any(s => s.Coordenada.X == dto.X && s.Coordenada.Y == dto.Y))
-                throw new InvalidOperationException("Já existe uma sonda nessa coordenada.");
+                    throw new InvalidOperationException("Já existe uma sonda nessa coordenada.");
 
             var sonda = FabricaDeSonda.Criar(dto);
             _sondas.Add(sonda);
