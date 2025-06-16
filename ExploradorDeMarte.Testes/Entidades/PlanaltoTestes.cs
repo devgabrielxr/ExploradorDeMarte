@@ -1,7 +1,7 @@
 using ExploradorDeMarte.API.Dominio.DTOs;
 using ExploradorDeMarte.API.Dominio.Fabricas;
 
-namespace ExploradorDeMarte.Testes.Servicos
+namespace ExploradorDeMarte.Testes.Entidades
 {
     public class PlanaltoTestes
     {
