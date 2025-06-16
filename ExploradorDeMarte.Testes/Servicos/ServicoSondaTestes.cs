@@ -160,7 +160,4 @@ public class ServicoSondaTestes
         var sondas = _servicoSonda.ObterSondas();
         Assert.DoesNotContain(sondas, s => s.Nome == "Sonda 3");
     }
-
-
-
 }
