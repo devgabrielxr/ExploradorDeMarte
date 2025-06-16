@@ -24,19 +24,11 @@ namespace ExploradorDeMarte.API.Controladores
         }
 
         [HttpPost]
-        public IActionResult Criar([FromBody] SondaCriacaoDTO dto)
+        public IActionResult Criar([FromBody] SondaDTO dto)
         {
             try
             {
-                var sondaDTO = new SondaDTO
-                {
-                    Nome = dto.Nome,
-                    X = dto.X,
-                    Y = dto.Y,
-                    Direcao = dto.Direcao.ParaDirecaoEnum()
-                };
-
-                var resultado = _servicoSonda.CriarSonda(sondaDTO);
+                var resultado = _servicoSonda.CriarSonda(dto);
 
                 return CreatedAtAction(nameof(ObterTodas), new { nome = resultado.Nome }, new
                 {
