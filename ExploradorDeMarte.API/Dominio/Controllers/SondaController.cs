@@ -1,5 +1,4 @@
 using ExploradorDeMarte.API.Dominio.DTOs;
-using ExploradorDeMarte.API.Dominio.Extensoes;
 using ExploradorDeMarte.API.Dominio.Servicos.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
